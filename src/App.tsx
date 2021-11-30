@@ -1,11 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-function App() {
+import LoginPage from './pages/LoginPage'
+
+import 'antd/dist/antd.css'
+
+const App: React.FC = () => {
   return (
-    <div>
-      Init app
-    </div>
-  );
+    <>
+      <LoginPage></LoginPage>
+    </>
+  )
 }
 
-export default App;
+export default App

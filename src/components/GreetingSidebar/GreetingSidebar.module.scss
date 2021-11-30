@@ -1,0 +1,29 @@
+@import '../../styles/vars';
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  background-color: $primary_color;
+  color: white;
+  text-align: center;
+  min-height: 100%;
+  b {
+    font-weight: 500;
+  }
+  h3 {
+    margin-top: 48px;
+    margin-bottom: 16px;
+    font-size: 38px;
+    color: white;
+  }
+  p {
+    font-size: 24px;
+    margin-bottom: 48px;
+    &:nth-of-type(2) {
+      opacity: 0.5;
+    }
+  }
+}

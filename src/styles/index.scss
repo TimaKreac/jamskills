@@ -1,0 +1,31 @@
+@import 'reset-css';
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background: #fafafa;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+#root {
+  height: 100vh;
+}
+
+input,
+button {
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+.loginPage {
+  min-height: 100%;
+  display: flex;
+}
