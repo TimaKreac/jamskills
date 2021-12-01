@@ -4,10 +4,12 @@ import styles from './FormInput.module.scss'
 
 interface FormInputProps {
   type: string
+  value?: string
   className?: string
-  placeholder: string
-  icon: 'mail' | 'lock' | 'person'
-  required: boolean
+  placeholder?: string
+  icon?: 'mail' | 'lock' | 'person'
+  required?: boolean
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -16,21 +18,28 @@ const FormInput: React.FC<FormInputProps> = ({
   type,
   ...props
 }) => {
-  const [passwordType, setPasswordType] = useState(type)
+  const [inputType, setInputType] = useState(type)
 
   return (
     <div className={classNames(styles.root, className)}>
-      <img src={`/assets/${icon}.svg`} alt='icon' />
+      {icon && <img src={`/assets/${icon}.svg`} alt='icon' />}
       <div className={styles.inputBox}>
-        <input type={passwordType} className={styles.input} {...props} />
+        <input
+          name={type}
+          type={inputType}
+          className={styles.input}
+          autoComplete='off'
+          {...props}
+        />
+
         {type === 'password' && (
           <img
             className={styles.eye}
             src='/assets/eye.svg'
             alt='eye'
-            onMouseDown={() => setPasswordType('text')}
-            onMouseUp={() => setPasswordType('password')}
-            onMouseLeave={() => setPasswordType('password')}
+            onMouseDown={() => setInputType('text')}
+            onMouseUp={() => setInputType('password')}
+            onMouseLeave={() => setInputType('password')}
           />
         )}
       </div>

@@ -1,21 +1,40 @@
-import React from 'react'
-import FormInput from '../FormInput/FormInput'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import styles from './LoginForm.module.scss'
+import FormInput from '../FormInput/FormInput'
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary'
+import { AuthActionCreators } from '../../store/auth/auth.actions'
+import { useActions } from '../../hooks/useActions'
 
 interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const { login } = useActions()
+
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    login(email, password)
+  }
+
   return (
     <div className={styles.root}>
       <h3 className={styles.title}>Авторизация</h3>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={submitHandler}>
         <FormInput
           className={styles.input}
           type='email'
           placeholder='example@mail.com'
           icon='mail'
           required
+          value={email}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
         />
         <FormInput
           className={styles.input}
@@ -23,6 +42,10 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           placeholder='••••••••'
           icon='lock'
           required
+          value={password}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
         />
         <ButtonPrimary text='Войти' type='submit' />
       </form>
