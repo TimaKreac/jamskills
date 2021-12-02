@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import AppRouter from './components/AppRouter'
+import AppRouter from './components/AppRouter';
 
 const App: React.FC = () => {
-  return <AppRouter />
-}
+  return <AppRouter />;
+};
 
-export default App
+export default App;

@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './ButtonPrimary.module.scss'
+import styles from './ButtonPrimary.module.scss';
 
 interface ButtonPrimaryProps {
-  text: string
-  type: 'button' | 'submit' | 'reset'
+  text: string;
+  type: 'button' | 'submit' | 'reset';
 }
 
 const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({ text, ...props }) => {
@@ -12,7 +12,7 @@ const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({ text, ...props }) => {
     <button className={styles.btn} {...props}>
       {text}
     </button>
-  )
-}
+  );
+};
 
-export default ButtonPrimary
+export default ButtonPrimary;

@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import styles from './LoginForm.module.scss'
-import FormInput from '../FormInput/FormInput'
-import ButtonPrimary from '../ButtonPrimary/ButtonPrimary'
-import { useActions } from '../../hooks/useActions'
+import styles from './LoginForm.module.scss';
+import FormInput from '../FormInput/FormInput';
+import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
+import { useActions } from '../../hooks/useActions';
 
 interface LoginFormProps {}
 
 const LoginForm: React.FC<LoginFormProps> = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const { login } = useActions()
+  const { login } = useActions();
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    login(email, password)
-  }
+    login(email, password);
+  };
 
   return (
     <div className={styles.root}>
@@ -25,9 +25,9 @@ const LoginForm: React.FC<LoginFormProps> = () => {
       <form className={styles.form} onSubmit={submitHandler}>
         <FormInput
           className={styles.input}
-          type='email'
-          placeholder='example@mail.com'
-          icon='mail'
+          type="email"
+          placeholder="example@mail.com"
+          icon="mail"
           required
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -36,19 +36,19 @@ const LoginForm: React.FC<LoginFormProps> = () => {
         />
         <FormInput
           className={styles.input}
-          type='password'
-          placeholder='••••••••'
-          icon='lock'
+          type="password"
+          placeholder="••••••••"
+          icon="lock"
           required
           value={password}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPassword(e.target.value)
           }
         />
-        <ButtonPrimary text='Войти' type='submit' />
+        <ButtonPrimary text="Войти" type="submit" />
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

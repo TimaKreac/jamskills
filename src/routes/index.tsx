@@ -1,9 +1,9 @@
-import React from 'react'
-import LoginPage from '../pages/LoginPage'
+import React from 'react';
+import LoginPage from '../pages/LoginPage';
 
 export interface IRoute {
-  path: string
-  element: React.ReactElement
+  path: string;
+  element: React.ReactElement;
 }
 
 export enum RouteNames {
@@ -12,6 +12,6 @@ export enum RouteNames {
 
 export const publicRoutes: IRoute[] = [
   { path: RouteNames.LOGIN, element: <LoginPage /> },
-]
+];
 
-export const privateRoutes: IRoute[] = [{ path: '/', element: <LoginPage /> }]
+export const privateRoutes: IRoute[] = [{ path: '/', element: <LoginPage /> }];

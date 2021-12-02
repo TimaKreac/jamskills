@@ -1,13 +1,13 @@
-import axios from 'axios'
-import { AppDispatch } from '..'
-import { IUser } from './../../models/IUser'
+import axios from 'axios';
+import { AppDispatch } from '..';
+import { IUser } from './../../models/IUser';
 import {
   AuthActionsEnum,
   SetAuthAction,
   SetErrorAction,
   SetIsLoadingAction,
   SetUserAction,
-} from './auth.types'
+} from './auth.types';
 
 export const AuthActionCreators = {
   setAuth: (isAuth: boolean): SetAuthAction => ({
@@ -28,7 +28,7 @@ export const AuthActionCreators = {
   }),
   login: (email: string, password: string) => async (dispatch: AppDispatch) => {
     try {
-      dispatch(AuthActionCreators.setIsLoading(true))
+      dispatch(AuthActionCreators.setIsLoading(true));
 
       const res = await axios.post(
         '/testingusers/login',
@@ -38,34 +38,34 @@ export const AuthActionCreators = {
         },
         {
           validateStatus: function (status) {
-            return status < 500 // Resolve only if the status code is less than 500
+            return status < 500; // Resolve only if the status code is less than 500
           },
         }
-      )
+      );
 
       if (res.status !== 200) {
-        dispatch(AuthActionCreators.setError(res.data))
-        throw new Error('Некорректный ввод данных')
+        dispatch(AuthActionCreators.setError(res.data));
+        throw new Error('Некорректный ввод данных');
       }
 
-      localStorage.setItem('auth', 'true')
-      localStorage.setItem('email', email)
-      localStorage.setItem('token', res.data.token)
+      localStorage.setItem('auth', 'true');
+      localStorage.setItem('email', email);
+      localStorage.setItem('token', res.data.token);
 
-      dispatch(AuthActionCreators.setAuth(true))
-      dispatch(AuthActionCreators.setUser({ email, password }))
+      dispatch(AuthActionCreators.setAuth(true));
+      dispatch(AuthActionCreators.setUser({ email, password }));
 
-      console.log('token', res.data)
-      dispatch(AuthActionCreators.setIsLoading(false))
+      console.log('token', res.data);
+      dispatch(AuthActionCreators.setIsLoading(false));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
   logout:
     (email: string, password: string) => async (dispatch: AppDispatch) => {
-      localStorage.removeItem('auth')
-      localStorage.removeItem('email')
-      dispatch(AuthActionCreators.setAuth(false))
-      dispatch(AuthActionCreators.setUser({} as IUser))
+      localStorage.removeItem('auth');
+      localStorage.removeItem('email');
+      dispatch(AuthActionCreators.setAuth(false));
+      dispatch(AuthActionCreators.setUser({} as IUser));
     },
-}
+};

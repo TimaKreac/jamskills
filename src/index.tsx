@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { BrowserRouter } from 'react-router-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
-import App from './App'
-import { store } from './store'
+import App from './App';
+import { store } from './store';
 
-import 'antd/dist/antd.css'
-import './styles/index.scss'
+import 'antd/dist/antd.css';
+import './styles/index.scss';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -16,4 +16,4 @@ ReactDOM.render(
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
-)
+);

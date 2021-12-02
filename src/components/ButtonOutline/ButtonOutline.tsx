@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './ButtonOutline.module.scss'
+import styles from './ButtonOutline.module.scss';
 
 const ButtonOutline: React.FC = ({ children }) => {
-  return <button className={styles.btn}>{children}</button>
-}
+  return <button className={styles.btn}>{children}</button>;
+};
 
-export default ButtonOutline
+export default ButtonOutline;

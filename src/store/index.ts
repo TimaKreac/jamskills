@@ -1,26 +1,27 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux'
-import thunk from 'redux-thunk'
-import logger from 'redux-logger'
-import { composeWithDevTools } from 'redux-devtools-extension'
-import axios from 'axios'
-import reducers from './reducers'
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import axios from 'axios';
+import reducers from './reducers';
 
-axios.defaults.baseURL = 'https://api.jamskills.ml/api'
+// where to place it
+axios.defaults.baseURL = 'https://api.jamskills.ml/api';
 
-const token = localStorage.getItem('token')
+const token = localStorage.getItem('token');
 
 if (token) {
-  axios.defaults.headers.common['Authorization'] = token
+  axios.defaults.headers.common['Authorization'] = token;
 }
 
-const rootReducer = combineReducers(reducers)
+const rootReducer = combineReducers(reducers);
 
-const middlewares = [thunk, logger]
+const middlewares = [thunk, logger];
 
 export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(...middlewares))
-)
+);
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

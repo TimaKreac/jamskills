@@ -1,10 +1,10 @@
-import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useTypedSelector } from '../hooks/useTypedSelector'
-import { privateRoutes, publicRoutes, RouteNames } from '../routes'
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useTypedSelector } from '../hooks/useTypedSelector';
+import { privateRoutes, publicRoutes, RouteNames } from '../routes';
 
 const AppRouter: React.FC = () => {
-  const { isAuth } = useTypedSelector((state) => state.auth)
+  const { isAuth } = useTypedSelector((state) => state.auth);
 
   return isAuth ? (
     <Routes>
@@ -17,9 +17,9 @@ const AppRouter: React.FC = () => {
       {publicRoutes.map((route) => (
         <Route path={route.path} element={route.element} key={route.path} />
       ))}
-      <Route path='*' element={<Navigate to={RouteNames.LOGIN} replace />} />
+      <Route path="*" element={<Navigate to={RouteNames.LOGIN} replace />} />
     </Routes>
-  )
-}
+  );
+};
 
-export default AppRouter
+export default AppRouter;
