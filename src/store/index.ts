@@ -11,7 +11,7 @@ axios.defaults.baseURL = 'https://api.jamskills.ml/api';
 const token = localStorage.getItem('token');
 
 if (token) {
-  axios.defaults.headers.common['Authorization'] = token;
+  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
 const rootReducer = combineReducers(reducers);

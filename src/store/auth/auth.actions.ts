@@ -55,7 +55,6 @@ export const AuthActionCreators = {
       dispatch(AuthActionCreators.setAuth(true));
       dispatch(AuthActionCreators.setUser({ email, password }));
 
-      console.log('token', res.data);
       dispatch(AuthActionCreators.setIsLoading(false));
     } catch (error) {
       console.log(error);
