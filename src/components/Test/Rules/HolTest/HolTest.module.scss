@@ -1,0 +1,27 @@
+.holTest {
+  h3 {
+    font-size: 38px;
+    margin-bottom: 50px;
+  }
+  p {
+    font-size: 24px;
+    &:first-of-type {
+      margin-bottom: 30px;
+    }
+    &:last-of-type {
+      margin-top: 8px;
+      margin-bottom: 50px;
+      font-size: 16px;
+    }
+  }
+  .btns {
+    margin-bottom: 30px;
+    & > label {
+      margin: 0 60px;
+    }
+  }
+  button {
+    font-size: 24px;
+    padding: 12px 270px;
+  }
+}

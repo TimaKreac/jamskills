@@ -61,9 +61,9 @@ export const AuthActionCreators = {
     }
   },
   logout: () => async (dispatch: AppDispatch) => {
-    localStorage.removeItem('auth');
-    localStorage.removeItem('email');
     dispatch(AuthActionCreators.setAuth(false));
     dispatch(AuthActionCreators.setUser({} as IUser));
+    localStorage.removeItem('auth');
+    localStorage.removeItem('email');
   },
 };

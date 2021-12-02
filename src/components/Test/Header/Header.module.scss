@@ -1,0 +1,13 @@
+@import '../../../styles/vars';
+
+.header {
+  padding: 73px 146px 0 146px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
+  margin-right: 130px;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../components/Header/Header';
+import Header from '../components/Home/Header/Header';
 import HomeContent from '../components/Home/Content/Content';
 
 const HomePage: React.FC = () => {

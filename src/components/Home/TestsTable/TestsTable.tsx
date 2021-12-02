@@ -85,9 +85,9 @@ const TestsTable: React.FC = () => {
       <Column
         title="Действия"
         key="action"
-        render={() => (
+        render={(text, record: ITest) => (
           <Space size="middle">
-            <a href="/">Перейти </a>
+            <a href={`/test/${record.id}`}>Перейти </a>
             <a href="/">Отказ</a>
             <a href="/">Результат</a>
           </Space>

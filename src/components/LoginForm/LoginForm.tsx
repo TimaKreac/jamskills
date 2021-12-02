@@ -45,7 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
             setPassword(e.target.value)
           }
         />
-        <ButtonPrimary text="Войти" type="submit" />
+        <ButtonPrimary type="submit">Войти</ButtonPrimary>
       </form>
     </div>
   );
