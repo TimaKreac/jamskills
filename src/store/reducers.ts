@@ -1,5 +1,7 @@
 import auth from './auth/auth.reducer'
 
-export default {
+const reducers = {
   auth,
 }
+
+export default reducers

@@ -31,7 +31,7 @@ export const AuthActionCreators = {
       dispatch(AuthActionCreators.setIsLoading(true))
 
       const res = await axios.post(
-        'https://api.jamskills.ml/api/testingusers/login',
+        '/testingusers/login',
         {
           email,
           password,
@@ -50,6 +50,7 @@ export const AuthActionCreators = {
 
       localStorage.setItem('auth', 'true')
       localStorage.setItem('email', email)
+      localStorage.setItem('token', res.data.token)
 
       dispatch(AuthActionCreators.setAuth(true))
       dispatch(AuthActionCreators.setUser({ email, password }))

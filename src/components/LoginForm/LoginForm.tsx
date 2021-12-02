@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
 
 import styles from './LoginForm.module.scss'
 import FormInput from '../FormInput/FormInput'
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary'
-import { AuthActionCreators } from '../../store/auth/auth.actions'
 import { useActions } from '../../hooks/useActions'
 
 interface LoginFormProps {}
