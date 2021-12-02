@@ -11,6 +11,7 @@ const AppRouter: React.FC = () => {
       {privateRoutes.map((route) => (
         <Route path={route.path} element={route.element} key={route.path} />
       ))}
+      <Route path="*" element={<Navigate to={RouteNames.HOME} replace />} />
     </Routes>
   ) : (
     <Routes>

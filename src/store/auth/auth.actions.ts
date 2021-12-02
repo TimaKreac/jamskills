@@ -61,11 +61,10 @@ export const AuthActionCreators = {
       console.log(error);
     }
   },
-  logout:
-    (email: string, password: string) => async (dispatch: AppDispatch) => {
-      localStorage.removeItem('auth');
-      localStorage.removeItem('email');
-      dispatch(AuthActionCreators.setAuth(false));
-      dispatch(AuthActionCreators.setUser({} as IUser));
-    },
+  logout: () => async (dispatch: AppDispatch) => {
+    localStorage.removeItem('auth');
+    localStorage.removeItem('email');
+    dispatch(AuthActionCreators.setAuth(false));
+    dispatch(AuthActionCreators.setUser({} as IUser));
+  },
 };

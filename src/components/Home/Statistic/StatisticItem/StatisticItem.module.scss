@@ -1,0 +1,26 @@
+.title {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.45);
+  margin-bottom: 8px;
+  position: relative;
+  padding-left: 14px;
+  span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: blue;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.value {
+  padding-left: 14px;
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.85);
+  img {
+    margin-right: 5px;
+  }
+}
