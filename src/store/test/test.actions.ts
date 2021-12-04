@@ -3,6 +3,7 @@ import {
   IHolAnswer,
   IUskAnswer,
   IGatbAnswer,
+  IAnswers,
 } from './../../models/ITestItem';
 import { ITest } from './../../models/ITest';
 import {
@@ -13,11 +14,16 @@ import {
   AddHolAnswerAction,
   AddUskAnswerAction,
   AddGatbAnswerAction,
+  SetAnswersAction,
 } from './test.types';
 import { AppDispatch } from '..';
 import TestService from '../../api/TestService';
 
 export const TestActionCreators = {
+  setAnswers: (answers: IAnswers): SetAnswersAction => ({
+    type: TestActionsEnum.SET_ANSWERS,
+    payload: answers,
+  }),
   setCurrentStep: (step: number): SetCurrentStepAction => ({
     type: TestActionsEnum.SET_CURRENT_STEP,
     payload: step,

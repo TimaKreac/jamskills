@@ -35,3 +35,9 @@ export interface IUskAnswer {
 export interface IGatbAnswer {
   result: number;
 }
+
+export interface IAnswers {
+  hol: IHolAnswer[];
+  usk: IUskAnswer[];
+  gatb: IGatbAnswer;
+}

@@ -47,6 +47,11 @@ export default function testReducer(
           gatb: action.payload,
         },
       };
+    case TestActionsEnum.SET_ANSWERS:
+      return {
+        ...state,
+        answers: action.payload,
+      };
     default:
       return state;
   }

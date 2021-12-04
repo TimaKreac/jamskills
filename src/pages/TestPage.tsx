@@ -8,9 +8,9 @@ import { useSteps } from '../hooks/useSteps';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 
 const TestPage: React.FC = () => {
-  const { getTest } = useActions();
+  const { getTest, setCurrentStep, setAnswers } = useActions();
   const params = useParams();
-  const { currentStep } = useTypedSelector((state) => state.test);
+  const { currentStep, answers } = useTypedSelector((state) => state.test);
 
   const steps = useSteps();
 
@@ -18,8 +18,24 @@ const TestPage: React.FC = () => {
     if (params.id) {
       getTest(params.id);
     }
+
+    const test = localStorage.getItem(`test${params.id}`);
+
+    if (test) {
+      const testObj = JSON.parse(test);
+
+      setAnswers(testObj.answers);
+      setCurrentStep(testObj.currentStep || 0);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      `test${params.id}`,
+      JSON.stringify({ answers, currentStep })
+    );
+  }, [answers, currentStep]);
 
   return (
     <div className="testPage page">

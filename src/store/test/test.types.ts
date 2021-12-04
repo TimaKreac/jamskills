@@ -3,6 +3,7 @@ import {
   IHolAnswer,
   IUskAnswer,
   IGatbAnswer,
+  IAnswers,
 } from './../../models/ITestItem';
 import { ITest } from './../../models/ITest';
 
@@ -10,11 +11,7 @@ export interface TestState {
   tests: ITest[];
   test: ITestItem[];
   currentStep: number;
-  answers: {
-    hol: IHolAnswer[];
-    usk: IUskAnswer[];
-    gatb: IGatbAnswer;
-  };
+  answers: IAnswers;
 }
 
 export enum TestActionsEnum {
@@ -24,6 +21,12 @@ export enum TestActionsEnum {
   ADD_HOL_ANSWER = 'ADD_HOL_ANSWER',
   ADD_USK_ANSWER = 'ADD_USK_ANSWER',
   ADD_GATB_ANSWER = 'ADD_GATB_ANSWER',
+  SET_ANSWERS = 'SET_ANSWERS',
+}
+
+export interface SetAnswersAction {
+  type: TestActionsEnum.SET_ANSWERS;
+  payload: IAnswers;
 }
 
 export interface AddHolAnswerAction {
@@ -62,4 +65,5 @@ export type TestAction =
   | SetCurrentStepAction
   | AddHolAnswerAction
   | AddUskAnswerAction
-  | AddGatbAnswerAction;
+  | AddGatbAnswerAction
+  | SetAnswersAction;
