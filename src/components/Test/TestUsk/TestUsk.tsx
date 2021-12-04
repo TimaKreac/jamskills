@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Progress } from 'antd';
 
 import { IUskTestItem } from '../../../models/ITestItem';
@@ -14,9 +14,19 @@ interface TestUskProps {
 }
 
 const TestUsk: React.FC<TestUskProps> = ({ uskTestItem }) => {
-  const { question } = uskTestItem;
+  const { index, question } = uskTestItem;
   const { currentStep } = useTypedSelector((state) => state.test);
-  const { setCurrentStep } = useActions();
+  const { setCurrentStep, addUskAnswer } = useActions();
+  const [answer, setAnswer] = useState('');
+
+  const toNextAnswer = () => {
+    addUskAnswer({
+      index,
+      code: answer,
+    });
+    setCurrentStep(currentStep + 1);
+    setAnswer('');
+  };
 
   return (
     <div className={styles.uskTest}>
@@ -24,14 +34,14 @@ const TestUsk: React.FC<TestUskProps> = ({ uskTestItem }) => {
       <Progress percent={50} className="test_progress" />
       <div className={styles.box}>
         <div className={styles.question}>{question}</div>
-        <Choices />
+        <Choices
+          key={index}
+          onSetAnswer={(answer) => setAnswer(answer)}
+          onDoubleClick={toNextAnswer}
+        />
       </div>
 
-      <ButtonPrimary
-        type="button"
-        onClick={() => setCurrentStep(currentStep + 1)}
-        disabled
-      >
+      <ButtonPrimary type="button" onClick={toNextAnswer} disabled={!answer}>
         Продолжить
       </ButtonPrimary>
     </div>

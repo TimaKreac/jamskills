@@ -34,7 +34,7 @@ const TestHol: React.FC<TestHolProps> = ({ holTestItem }) => {
 
   return (
     <div className={styles.holTest}>
-      <h3>{question}</h3> {answer}
+      <h3>{question}</h3>
       <Progress percent={50} className="test_progress" />
       <div className={styles.btns}>
         <RadioButton

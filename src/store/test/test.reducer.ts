@@ -30,6 +30,14 @@ export default function testReducer(
           hol: [...state.answers.hol, action.payload],
         },
       };
+    case TestActionsEnum.ADD_USK_ANSWER:
+      return {
+        ...state,
+        answers: {
+          ...state.answers,
+          usk: [...state.answers.usk, action.payload],
+        },
+      };
     default:
       return state;
   }

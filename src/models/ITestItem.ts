@@ -28,3 +28,7 @@ export interface IHolAnswer {
   index: number;
   name: string;
 }
+export interface IUskAnswer {
+  index: number;
+  code: string;
+}
