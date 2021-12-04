@@ -1,16 +1,29 @@
-import { ITestItem } from './../../models/ITestItem';
+import { ITestItem, IHolAnswer } from './../../models/ITestItem';
 import { ITest } from './../../models/ITest';
 
 export interface TestState {
   tests: ITest[];
   test: ITestItem[];
   currentStep: number;
+  answers: {
+    hol: IHolAnswer[];
+    usk: [];
+    gatb: [];
+  };
 }
 
 export enum TestActionsEnum {
   SET_TESTS = 'SET_TESTS',
   SET_TEST = 'SET_TEST',
   SET_CURRENT_STEP = 'SET_CURRENT_STEP',
+  ADD_HOL_ANSWER = 'ADD_HOL_ANSWER',
+  ADD_USL_ANSWER = 'ADD_USL_ANSWER',
+  ADD_GATB_ANSWER = 'ADD_GATB_ANSWER',
+}
+
+export interface AddHolAnswerAction {
+  type: TestActionsEnum.ADD_HOL_ANSWER;
+  payload: IHolAnswer;
 }
 
 export interface SetTestsAction {
@@ -28,4 +41,8 @@ export interface SetCurrentStepAction {
   payload: number;
 }
 
-export type TestAction = SetTestsAction | SetTestAction | SetCurrentStepAction;
+export type TestAction =
+  | SetTestsAction
+  | SetTestAction
+  | SetCurrentStepAction
+  | AddHolAnswerAction;

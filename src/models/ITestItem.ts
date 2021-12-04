@@ -23,3 +23,8 @@ export interface IUskTestItem {
   index: number;
   question: string;
 }
+
+export interface IHolAnswer {
+  index: number;
+  name: string;
+}

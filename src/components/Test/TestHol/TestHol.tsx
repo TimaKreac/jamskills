@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Progress } from 'antd';
 
 import { IHolTestItem } from '../../../models/ITestItem';
@@ -14,34 +14,47 @@ interface TestHolProps {
 }
 
 const TestHol: React.FC<TestHolProps> = ({ holTestItem }) => {
-  const { answers, question } = holTestItem;
+  const { index, answers, question } = holTestItem;
   const { currentStep } = useTypedSelector((state) => state.test);
-  const { setCurrentStep } = useActions();
+  const { setCurrentStep, addHolAnswer } = useActions();
+  const [answer, setAnswer] = useState('');
+
+  const chooseHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAnswer(e.target.value);
+  };
+
+  const toNextAnswer = () => {
+    addHolAnswer({
+      index,
+      name: answer,
+    });
+    setCurrentStep(currentStep + 1);
+    setAnswer('');
+  };
 
   return (
     <div className={styles.holTest}>
-      <h3>{question}</h3>
+      <h3>{question}</h3> {answer}
       <Progress percent={50} className="test_progress" />
       <div className={styles.btns}>
         <RadioButton
           name="choice"
           text={answers.left.text}
           value={answers.left.name}
-          onDoubleClick={() => setCurrentStep(currentStep + 1)}
-          onChange={(e) => console.log(e.target.value)}
+          onDoubleClick={toNextAnswer}
+          onChange={chooseHandler}
+          key={answers.left.name + index}
         />
         <RadioButton
           name="choice"
           text={answers.right.text}
           value={answers.right.name}
-          onDoubleClick={() => setCurrentStep(currentStep + 1)}
-          onChange={(e) => console.log(e.target.value)}
+          onDoubleClick={toNextAnswer}
+          onChange={chooseHandler}
+          key={answers.right.name + index}
         />
       </div>
-      <ButtonPrimary
-        type="button"
-        onClick={() => setCurrentStep(currentStep + 1)}
-      >
+      <ButtonPrimary type="button" onClick={toNextAnswer} disabled={!answer}>
         Продолжить
       </ButtonPrimary>
     </div>

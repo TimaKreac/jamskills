@@ -3,7 +3,12 @@ import { TestAction, TestActionsEnum, TestState } from './test.types';
 const initialState: TestState = {
   tests: [],
   test: [],
-  currentStep: 8,
+  currentStep: 0,
+  answers: {
+    hol: [],
+    usk: [],
+    gatb: [],
+  },
 };
 
 export default function testReducer(
@@ -17,6 +22,14 @@ export default function testReducer(
       return { ...state, tests: action.payload };
     case TestActionsEnum.SET_CURRENT_STEP:
       return { ...state, currentStep: action.payload };
+    case TestActionsEnum.ADD_HOL_ANSWER:
+      return {
+        ...state,
+        answers: {
+          ...state.answers,
+          hol: [...state.answers.hol, action.payload],
+        },
+      };
     default:
       return state;
   }

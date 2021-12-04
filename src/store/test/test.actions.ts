@@ -1,10 +1,11 @@
-import { ITestItem } from './../../models/ITestItem';
+import { ITestItem, IHolAnswer } from './../../models/ITestItem';
 import { ITest } from './../../models/ITest';
 import {
   TestActionsEnum,
   SetTestsAction,
   SetTestAction,
   SetCurrentStepAction,
+  AddHolAnswerAction,
 } from './test.types';
 import { AppDispatch } from '..';
 import TestService from '../../api/TestService';
@@ -13,6 +14,10 @@ export const TestActionCreators = {
   setCurrentStep: (step: number): SetCurrentStepAction => ({
     type: TestActionsEnum.SET_CURRENT_STEP,
     payload: step,
+  }),
+  addHolAnswer: (answer: IHolAnswer): AddHolAnswerAction => ({
+    type: TestActionsEnum.ADD_HOL_ANSWER,
+    payload: answer,
   }),
   getTest: (id: string) => async (dispatch: AppDispatch) => {
     try {
