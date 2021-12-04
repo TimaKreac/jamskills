@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { AppDispatch } from '..';
+import UserService from '../../api/UserService';
 import { IUser } from './../../models/IUser';
 import {
   AuthActionsEnum,
@@ -30,18 +30,7 @@ export const AuthActionCreators = {
     try {
       dispatch(AuthActionCreators.setIsLoading(true));
 
-      const res = await axios.post(
-        '/testingusers/login',
-        {
-          email,
-          password,
-        },
-        {
-          validateStatus: function (status) {
-            return status < 500; // Resolve only if the status code is less than 500
-          },
-        }
-      );
+      const res = await UserService.loginUser(email, password);
 
       if (res.status !== 200) {
         dispatch(AuthActionCreators.setError(res.data));
@@ -54,7 +43,6 @@ export const AuthActionCreators = {
 
       dispatch(AuthActionCreators.setAuth(true));
       dispatch(AuthActionCreators.setUser({ email, password }));
-
       dispatch(AuthActionCreators.setIsLoading(false));
     } catch (error) {
       console.log(error);

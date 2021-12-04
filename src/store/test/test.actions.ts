@@ -1,29 +1,51 @@
+import { ITestItem } from './../../models/ITestItem';
 import { ITest } from './../../models/ITest';
-import { TestActionsEnum, SetTestsAction } from './test.types';
-import axios from 'axios';
+import {
+  TestActionsEnum,
+  SetTestsAction,
+  SetTestAction,
+  SetCurrentStepAction,
+} from './test.types';
 import { AppDispatch } from '..';
+import TestService from '../../api/TestService';
 
 export const TestActionCreators = {
-  setTests: (tests: ITest[]): SetTestsAction => ({
-    type: TestActionsEnum.SET_TESTS,
-    payload: tests,
+  setCurrentStep: (step: number): SetCurrentStepAction => ({
+    type: TestActionsEnum.SET_CURRENT_STEP,
+    payload: step,
+  }),
+  getTest: (id: string) => async (dispatch: AppDispatch) => {
+    try {
+      const res = await TestService.getTest(id);
+
+      if (res.status !== 200) {
+        throw new Error('Ошибка при получении теста');
+      }
+
+      dispatch(TestActionCreators.setTest(res.data));
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  setTest: (test: ITestItem[]): SetTestAction => ({
+    type: TestActionsEnum.SET_TEST,
+    payload: test,
   }),
   getTests: () => async (dispatch: AppDispatch) => {
     try {
-      const res = await axios.get('/testingusers/setquizzes', {
-        validateStatus: function (status) {
-          return status < 500; // Resolve only if the status code is less than 500
-        },
-      });
+      const res = await TestService.getTests();
 
       if (res.status !== 200) {
-        throw new Error('Ошибка');
+        throw new Error('Ошибка при получении тестов');
       }
 
-      console.log('token', res.data);
       dispatch(TestActionCreators.setTests(res.data));
     } catch (error) {
       console.log(error);
     }
   },
+  setTests: (tests: ITest[]): SetTestsAction => ({
+    type: TestActionsEnum.SET_TESTS,
+    payload: tests,
+  }),
 };
