@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import styles from './RadioButton.module.scss';
 
 interface RadioButtonProps {
-  key?: any;
   className?: string;
   id?: string;
   name: string;
@@ -15,7 +14,6 @@ interface RadioButtonProps {
 }
 
 const RadioButton: React.FC<RadioButtonProps> = ({
-  key,
   className,
   name,
   id,
@@ -35,7 +33,6 @@ const RadioButton: React.FC<RadioButtonProps> = ({
         id={id}
         value={value}
         onChange={onChange}
-        key={key}
       />
       <span>{text}</span>
     </label>
