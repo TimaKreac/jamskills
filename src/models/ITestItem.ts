@@ -32,3 +32,6 @@ export interface IUskAnswer {
   index: number;
   code: string;
 }
+export interface IGatbAnswer {
+  result: number;
+}

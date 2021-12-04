@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Progress } from 'antd';
 
 import styles from './TestGatb.module.scss';
@@ -8,7 +8,15 @@ import { useActions } from '../../../hooks/useActions';
 
 const TestGatb: React.FC = () => {
   const { currentStep } = useTypedSelector((state) => state.test);
-  const { setCurrentStep } = useActions();
+  const { setCurrentStep, addGatbAnswer } = useActions();
+  const [count, setCount] = useState(0);
+
+  const finishTest = () => {
+    addGatbAnswer({
+      result: count,
+    });
+    setCurrentStep(currentStep + 1);
+  };
 
   return (
     <div className={styles.gatbTest}>
@@ -16,15 +24,15 @@ const TestGatb: React.FC = () => {
       <Progress percent={50} className="test_progress" />
 
       <div className={styles.images}>
-        <img src="/assets/gatb-left.jpg" alt="gatb-left" />
+        <img
+          src="/assets/gatb-left.jpg"
+          alt="gatb-left"
+          onClick={() => setCount(count + 1)}
+        />
         <img src="/assets/gatb-right.jpg" alt="gatb-right" />
       </div>
 
-      <ButtonPrimary
-        type="button"
-        onClick={() => setCurrentStep(currentStep + 1)}
-        disabled
-      >
+      <ButtonPrimary type="button" onClick={finishTest} disabled={!count}>
         Продолжить
       </ButtonPrimary>
     </div>

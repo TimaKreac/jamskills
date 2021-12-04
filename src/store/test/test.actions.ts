@@ -1,4 +1,9 @@
-import { ITestItem, IHolAnswer, IUskAnswer } from './../../models/ITestItem';
+import {
+  ITestItem,
+  IHolAnswer,
+  IUskAnswer,
+  IGatbAnswer,
+} from './../../models/ITestItem';
 import { ITest } from './../../models/ITest';
 import {
   TestActionsEnum,
@@ -7,6 +12,7 @@ import {
   SetCurrentStepAction,
   AddHolAnswerAction,
   AddUskAnswerAction,
+  AddGatbAnswerAction,
 } from './test.types';
 import { AppDispatch } from '..';
 import TestService from '../../api/TestService';
@@ -22,6 +28,10 @@ export const TestActionCreators = {
   }),
   addUskAnswer: (answer: IUskAnswer): AddUskAnswerAction => ({
     type: TestActionsEnum.ADD_USK_ANSWER,
+    payload: answer,
+  }),
+  addGatbAnswer: (answer: IGatbAnswer): AddGatbAnswerAction => ({
+    type: TestActionsEnum.ADD_GATB_ANSWER,
     payload: answer,
   }),
   getTest: (id: string) => async (dispatch: AppDispatch) => {

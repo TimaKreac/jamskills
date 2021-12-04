@@ -1,3 +1,4 @@
+import { IGatbAnswer } from './../../models/ITestItem';
 import { TestAction, TestActionsEnum, TestState } from './test.types';
 
 const initialState: TestState = {
@@ -7,7 +8,7 @@ const initialState: TestState = {
   answers: {
     hol: [],
     usk: [],
-    gatb: [],
+    gatb: {} as IGatbAnswer,
   },
 };
 
@@ -36,6 +37,14 @@ export default function testReducer(
         answers: {
           ...state.answers,
           usk: [...state.answers.usk, action.payload],
+        },
+      };
+    case TestActionsEnum.ADD_GATB_ANSWER:
+      return {
+        ...state,
+        answers: {
+          ...state.answers,
+          gatb: action.payload,
         },
       };
     default:

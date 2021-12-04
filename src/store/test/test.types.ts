@@ -1,4 +1,9 @@
-import { ITestItem, IHolAnswer, IUskAnswer } from './../../models/ITestItem';
+import {
+  ITestItem,
+  IHolAnswer,
+  IUskAnswer,
+  IGatbAnswer,
+} from './../../models/ITestItem';
 import { ITest } from './../../models/ITest';
 
 export interface TestState {
@@ -8,7 +13,7 @@ export interface TestState {
   answers: {
     hol: IHolAnswer[];
     usk: IUskAnswer[];
-    gatb: [];
+    gatb: IGatbAnswer;
   };
 }
 
@@ -31,6 +36,11 @@ export interface AddUskAnswerAction {
   payload: IUskAnswer;
 }
 
+export interface AddGatbAnswerAction {
+  type: TestActionsEnum.ADD_GATB_ANSWER;
+  payload: IGatbAnswer;
+}
+
 export interface SetTestsAction {
   type: TestActionsEnum.SET_TESTS;
   payload: ITest[];
@@ -51,4 +61,5 @@ export type TestAction =
   | SetTestAction
   | SetCurrentStepAction
   | AddHolAnswerAction
-  | AddUskAnswerAction;
+  | AddUskAnswerAction
+  | AddGatbAnswerAction;
