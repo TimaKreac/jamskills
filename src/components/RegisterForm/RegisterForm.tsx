@@ -5,6 +5,8 @@ import FormInput from '../FormInput/FormInput';
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import { useActions } from '../../hooks/useActions';
 import FormInputGroup from '../FormInputGroup/FormInputGroup';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { IAuthError } from '../../models/IAuthError';
 
 const RegisterForm: React.FC = () => {
   const [name, setName] = useState({
@@ -15,14 +17,22 @@ const RegisterForm: React.FC = () => {
   const [pass, setPass] = useState({
     password: '',
     repeatPassword: '',
+    error: '',
   });
   const [email, setEmail] = useState('');
 
   const { register } = useActions();
 
+  const { error } = useTypedSelector((state) => state.auth);
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const isPassEqual = pass.password === pass.repeatPassword;
 
+    if (!isPassEqual) {
+      return setPass({ ...pass, error: 'Пароли не совпадают' });
+    }
+    setPass({ ...pass, error: '' });
     register({
       email,
       password: pass.password,
@@ -63,6 +73,9 @@ const RegisterForm: React.FC = () => {
             setEmail(e.target.value)
           }
         />
+        {(error as IAuthError).email && (
+          <span className={styles.error}>{(error as IAuthError).email[0]}</span>
+        )}
         <FormInputGroup
           count={2}
           names={['password', 'repeatPassword']}
@@ -79,6 +92,7 @@ const RegisterForm: React.FC = () => {
             })
           }
         />
+        {pass.error && <span className={styles.error}>{pass.error}</span>}
         <ButtonPrimary type="submit">Создать</ButtonPrimary>
       </form>
     </div>

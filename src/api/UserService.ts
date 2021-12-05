@@ -1,3 +1,4 @@
+import { IAuthError } from './../models/IAuthError';
 import { IUser } from './../models/IUser';
 import axios, { AxiosResponse } from 'axios';
 
