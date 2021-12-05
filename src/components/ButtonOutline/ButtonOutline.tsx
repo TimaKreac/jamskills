@@ -2,8 +2,19 @@ import React from 'react';
 
 import styles from './ButtonOutline.module.scss';
 
-const ButtonOutline: React.FC = ({ children }) => {
-  return <button className={styles.btn}>{children}</button>;
+interface ButtonOutlineProps {
+  onClick: () => void;
+}
+
+const ButtonOutline: React.FC<ButtonOutlineProps> = ({
+  children,
+  ...props
+}) => {
+  return (
+    <button className={styles.btn} {...props}>
+      {children}
+    </button>
+  );
 };
 
 export default ButtonOutline;

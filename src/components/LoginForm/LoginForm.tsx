@@ -4,10 +4,9 @@ import styles from './LoginForm.module.scss';
 import FormInput from '../FormInput/FormInput';
 import ButtonPrimary from '../ButtonPrimary/ButtonPrimary';
 import { useActions } from '../../hooks/useActions';
+import { IUser } from '../../models/IUser';
 
-interface LoginFormProps {}
-
-const LoginForm: React.FC<LoginFormProps> = () => {
+const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,7 +15,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    login(email, password);
+    login({ email, password } as IUser);
   };
 
   return (

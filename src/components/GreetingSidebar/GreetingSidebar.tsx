@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import ButtonOutline from '../ButtonOutline/ButtonOutline';
 
 import styles from './GreetingSidebar.module.scss';
@@ -8,17 +9,39 @@ interface GreetingSidebarProps {
 }
 
 const GreetingSidebar: React.FC<GreetingSidebarProps> = ({ type }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.root}>
-      <img src="/logo_outline.svg" alt="logo" />
-      <h3>Добро пожаловать!</h3>
-      <p>
-        <b>Jamskills</b> - это сервис для автоматизации оценки сотрудников и
-        кандидатов!
-      </p>
-      <p>Если Вы еще не зарегистрированны, создайте свой кабинет </p>
-      <ButtonOutline>Создать</ButtonOutline>
-    </div>
+    <>
+      {type === 'login' && (
+        <div className={styles.root}>
+          <img src="/logo_outline.svg" alt="logo" />
+          <h3>Добро пожаловать!</h3>
+          <p>
+            <b>Jamskills</b> - это сервис для автоматизации оценки сотрудников и
+            кандидатов!
+          </p>
+          <p>Если Вы еще не зарегистрированны, создайте свой кабинет</p>
+          <ButtonOutline onClick={() => navigate('/register')}>
+            Создать
+          </ButtonOutline>
+        </div>
+      )}
+      {type === 'register' && (
+        <div className={styles.root}>
+          <img src="/logo_outline.svg" alt="logo" />
+          <h3>Добро пожаловать!</h3>
+          <p>
+            <b>Jamskills</b> - это сервис для автоматизации оценки сотрудников и
+            кандидатов!
+          </p>
+          <p>Если Вы уже зарегистрированны, войдите в свой кабинет</p>
+          <ButtonOutline onClick={() => navigate('/login')}>
+            Войти
+          </ButtonOutline>
+        </div>
+      )}
+    </>
   );
 };
 

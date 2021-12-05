@@ -26,11 +26,33 @@ export const AuthActionCreators = {
     type: AuthActionsEnum.SET_ERROR,
     payload: error,
   }),
-  login: (email: string, password: string) => async (dispatch: AppDispatch) => {
+  register: (user: IUser) => async (dispatch: AppDispatch) => {
     try {
       dispatch(AuthActionCreators.setIsLoading(true));
 
-      const res = await UserService.loginUser(email, password);
+      const res = await UserService.registerUser(user);
+
+      if (res.status !== 200) {
+        dispatch(AuthActionCreators.setError(res.data));
+        throw new Error('Регистрация завершилась некорректно');
+      }
+
+      localStorage.setItem('auth', 'true');
+      localStorage.setItem('email', user.email);
+      localStorage.setItem('token', res.data.token);
+
+      dispatch(AuthActionCreators.setAuth(true));
+      dispatch(AuthActionCreators.setUser(user));
+      dispatch(AuthActionCreators.setIsLoading(false));
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  login: (user: IUser) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch(AuthActionCreators.setIsLoading(true));
+
+      const res = await UserService.loginUser(user);
 
       if (res.status !== 200) {
         dispatch(AuthActionCreators.setError(res.data));
@@ -38,11 +60,11 @@ export const AuthActionCreators = {
       }
 
       localStorage.setItem('auth', 'true');
-      localStorage.setItem('email', email);
+      localStorage.setItem('email', user.email);
       localStorage.setItem('token', res.data.token);
 
       dispatch(AuthActionCreators.setAuth(true));
-      dispatch(AuthActionCreators.setUser({ email, password }));
+      dispatch(AuthActionCreators.setUser(user));
       dispatch(AuthActionCreators.setIsLoading(false));
     } catch (error) {
       console.log(error);

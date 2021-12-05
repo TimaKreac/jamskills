@@ -35,7 +35,7 @@ const TestPage: React.FC = () => {
       `test${params.id}`,
       JSON.stringify({ answers, currentStep })
     );
-  }, [answers, currentStep]);
+  }, [answers, currentStep, params.id]);
 
   return (
     <div className="testPage page">

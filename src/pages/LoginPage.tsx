@@ -6,7 +6,7 @@ const LoginPage: React.FC = () => {
   return (
     <div className="loginPage page">
       <GreetingSidebar type="login" />
-      <LoginForm></LoginForm>
+      <LoginForm />
     </div>
   );
 };
