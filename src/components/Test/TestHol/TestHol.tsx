@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Progress } from 'antd';
 
 import { IHolTestItem } from '../../../models/ITestItem';
@@ -11,12 +11,18 @@ import { useActions } from '../../../hooks/useActions';
 
 interface TestHolProps {
   holTestItem: IHolTestItem;
+  count: number;
+  currentQuestion: number;
 }
 
-const TestHol: React.FC<TestHolProps> = ({ holTestItem }) => {
+const TestHol: React.FC<TestHolProps> = ({
+  holTestItem,
+  count,
+  currentQuestion,
+}) => {
   const { index, answers, question } = holTestItem;
   const { currentStep } = useTypedSelector((state) => state.test);
-  const { setCurrentStep, addHolAnswer } = useActions();
+  const { setCurrentStep, addHolAnswer, setCurrentTest } = useActions();
   const [answer, setAnswer] = useState('');
 
   const chooseHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,10 +38,18 @@ const TestHol: React.FC<TestHolProps> = ({ holTestItem }) => {
     setAnswer('');
   };
 
+  useEffect(() => {
+    setCurrentTest('hol');
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <div className={styles.holTest}>
       <h3>{question}</h3>
-      <Progress percent={50} className="test_progress" />
+      <Progress
+        percent={Math.floor((currentQuestion / count) * 100)}
+        className="test_progress"
+      />
       <div className={styles.btns}>
         <RadioButton
           name="choice"

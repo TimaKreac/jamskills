@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Progress } from 'antd';
 
 import { IUskTestItem } from '../../../models/ITestItem';
@@ -11,12 +11,18 @@ import Choices from './Choices';
 
 interface TestUskProps {
   uskTestItem: IUskTestItem;
+  count: number;
+  currentQuestion: number;
 }
 
-const TestUsk: React.FC<TestUskProps> = ({ uskTestItem }) => {
+const TestUsk: React.FC<TestUskProps> = ({
+  uskTestItem,
+  count,
+  currentQuestion,
+}) => {
   const { index, question } = uskTestItem;
   const { currentStep } = useTypedSelector((state) => state.test);
-  const { setCurrentStep, addUskAnswer } = useActions();
+  const { setCurrentStep, addUskAnswer, setCurrentTest } = useActions();
   const [answer, setAnswer] = useState('');
 
   const toNextAnswer = () => {
@@ -28,10 +34,18 @@ const TestUsk: React.FC<TestUskProps> = ({ uskTestItem }) => {
     setAnswer('');
   };
 
+  useEffect(() => {
+    setCurrentTest('usk');
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <div className={styles.uskTest}>
       <h3>Выберите один из вариантов</h3>
-      <Progress percent={50} className="test_progress" />
+      <Progress
+        percent={Math.floor((currentQuestion / count) * 100)}
+        className="test_progress"
+      />
       <div className={styles.box}>
         <div className={styles.question}>{question}</div>
         <Choices

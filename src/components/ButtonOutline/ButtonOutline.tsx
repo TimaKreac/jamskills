@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './ButtonOutline.module.scss';
 
 interface ButtonOutlineProps {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const ButtonOutline: React.FC<ButtonOutlineProps> = ({

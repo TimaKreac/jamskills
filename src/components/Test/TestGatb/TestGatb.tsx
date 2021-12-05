@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { Progress } from 'antd';
-
+import React, { useEffect, useState } from 'react';
 import styles from './TestGatb.module.scss';
 import ButtonPrimary from '../../ButtonPrimary/ButtonPrimary';
 import { useTypedSelector } from '../../../hooks/useTypedSelector';
@@ -8,8 +6,20 @@ import { useActions } from '../../../hooks/useActions';
 
 const TestGatb: React.FC = () => {
   const { currentStep } = useTypedSelector((state) => state.test);
-  const { setCurrentStep, addGatbAnswer } = useActions();
+  const { setCurrentStep, addGatbAnswer, setCurrentTest } = useActions();
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCurrentTest('gatb-5');
+    //eslint-disable-next-line
+  }, []);
+
+  const countHandler = () => {
+    setCount(count + 1);
+    addGatbAnswer({
+      result: count,
+    });
+  };
 
   const finishTest = () => {
     addGatbAnswer({
@@ -21,15 +31,18 @@ const TestGatb: React.FC = () => {
   return (
     <div className={styles.gatbTest}>
       <h3>Найдите соответствующие фигуры в обоих множествах</h3>
-      <Progress percent={50} className="test_progress" />
 
       <div className={styles.images}>
         <img
           src="/assets/gatb-left.jpg"
           alt="gatb-left"
-          onClick={() => setCount(count + 1)}
+          onClick={countHandler}
         />
-        <img src="/assets/gatb-right.jpg" alt="gatb-right" />
+        <img
+          src="/assets/gatb-right.jpg"
+          alt="gatb-right"
+          onClick={countHandler}
+        />
       </div>
 
       <ButtonPrimary type="button" onClick={finishTest} disabled={!count}>

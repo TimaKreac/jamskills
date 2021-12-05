@@ -3,6 +3,8 @@ import { Steps } from 'antd';
 
 import styles from './Header.module.scss';
 import { useNavigate } from 'react-router';
+import { useTypedSelector } from '../../../hooks/useTypedSelector';
+import Timer from '../../Timer/Timer';
 
 const { Step } = Steps;
 
@@ -14,6 +16,7 @@ interface TestHeaderProps {
 const TestHeader: React.FC<TestHeaderProps> = ({ stepLength, currentStep }) => {
   const steps = new Array(stepLength).fill('');
   const navigate = useNavigate();
+  const { currentTest } = useTypedSelector((state) => state.test);
 
   return (
     <header className={styles.header}>
@@ -25,6 +28,7 @@ const TestHeader: React.FC<TestHeaderProps> = ({ stepLength, currentStep }) => {
           <Step key={index} />
         ))}
       </Steps>
+      {currentTest === 'gatb-5' && <Timer />}
     </header>
   );
 };

@@ -10,6 +10,7 @@ const initialState: TestState = {
     usk: [],
     gatb: {} as IGatbAnswer,
   },
+  currentTest: '',
 };
 
 export default function testReducer(
@@ -17,6 +18,8 @@ export default function testReducer(
   action: TestAction
 ): TestState {
   switch (action.type) {
+    case TestActionsEnum.SET_CURRENT_TEST:
+      return { ...state, currentTest: action.payload };
     case TestActionsEnum.SET_TEST:
       return { ...state, test: action.payload };
     case TestActionsEnum.SET_TESTS:

@@ -15,6 +15,7 @@ import {
   AddUskAnswerAction,
   AddGatbAnswerAction,
   SetAnswersAction,
+  SetCurrentTestAction,
 } from './test.types';
 import { AppDispatch } from '..';
 import TestService from '../../api/TestService';
@@ -23,6 +24,12 @@ export const TestActionCreators = {
   setAnswers: (answers: IAnswers): SetAnswersAction => ({
     type: TestActionsEnum.SET_ANSWERS,
     payload: answers,
+  }),
+  setCurrentTest: (
+    test: 'hol' | 'usk' | 'gatb-5' | ''
+  ): SetCurrentTestAction => ({
+    type: TestActionsEnum.SET_CURRENT_TEST,
+    payload: test,
   }),
   setCurrentStep: (step: number): SetCurrentStepAction => ({
     type: TestActionsEnum.SET_CURRENT_STEP,
@@ -74,4 +81,58 @@ export const TestActionCreators = {
     type: TestActionsEnum.SET_TESTS,
     payload: tests,
   }),
+  sendHolAnswers: (id: string) => async (dispatch: AppDispatch) => {
+    try {
+      const testsJSON = localStorage.getItem(`test${id}`);
+
+      if (testsJSON) {
+        const tests: { answers: IAnswers } = JSON.parse(testsJSON);
+        const res = await TestService.sendHolAnswers(id, tests.answers.hol);
+
+        if (res.status !== 200) {
+          throw new Error('Ошибка при получении ответов');
+        }
+
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  sendUskAnswers: (id: string) => async (dispatch: AppDispatch) => {
+    try {
+      const testsJSON = localStorage.getItem(`test${id}`);
+
+      if (testsJSON) {
+        const tests: { answers: IAnswers } = JSON.parse(testsJSON);
+        const res = await TestService.sendUskAnswers(id, tests.answers.usk);
+
+        if (res.status !== 200) {
+          throw new Error('Ошибка при получении ответов');
+        }
+
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  sendGatbAnswers: (id: string) => async (dispatch: AppDispatch) => {
+    try {
+      const testsJSON = localStorage.getItem(`test${id}`);
+
+      if (testsJSON) {
+        const tests: { answers: IAnswers } = JSON.parse(testsJSON);
+        const res = await TestService.sendGatbAnswers(id, tests.answers.gatb);
+
+        if (res.status !== 200) {
+          throw new Error('Ошибка при получении ответов');
+        }
+
+        console.log(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

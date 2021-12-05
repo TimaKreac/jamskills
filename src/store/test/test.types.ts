@@ -12,16 +12,23 @@ export interface TestState {
   test: ITestItem[];
   currentStep: number;
   answers: IAnswers;
+  currentTest: 'hol' | 'usk' | 'gatb-5' | '';
 }
 
 export enum TestActionsEnum {
   SET_TESTS = 'SET_TESTS',
   SET_TEST = 'SET_TEST',
+  SET_CURRENT_TEST = 'SET_CURRENT_TEST',
   SET_CURRENT_STEP = 'SET_CURRENT_STEP',
   ADD_HOL_ANSWER = 'ADD_HOL_ANSWER',
   ADD_USK_ANSWER = 'ADD_USK_ANSWER',
   ADD_GATB_ANSWER = 'ADD_GATB_ANSWER',
   SET_ANSWERS = 'SET_ANSWERS',
+}
+
+export interface SetCurrentTestAction {
+  type: TestActionsEnum.SET_CURRENT_TEST;
+  payload: 'hol' | 'usk' | 'gatb-5' | '';
 }
 
 export interface SetAnswersAction {
@@ -66,4 +73,5 @@ export type TestAction =
   | AddHolAnswerAction
   | AddUskAnswerAction
   | AddGatbAnswerAction
-  | SetAnswersAction;
+  | SetAnswersAction
+  | SetCurrentTestAction;
